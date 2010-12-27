@@ -1,0 +1,14 @@
+bin/
+eggs/
+parts/
+data/
+develop-eggs/
+.installed.cfg
+*.egg-info
+*.pyc
+*.*~
+Paste-1.7.5.1-py2.6.egg/
+PasteDeploy-1.3.4-py2.6.egg/
+PasteScript-1.7.3-py2.6.egg/
+development.db
+
