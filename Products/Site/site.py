@@ -92,7 +92,18 @@ return [
     context['menu_items'].ZPythonScript_edit('', menu_items)
 
     context.manage_addProduct['OFSP'].manage_addFolder('about', 'About')
+    f = open(ZOPE_HOME+'/Products/Site/templates/about.pt', 'r')
+    about_content = f.read()
+    f.close()
+    context['about'].manage_addProduct['PageTemplates'].manage_addPageTemplate(
+        'body.pt', text=about_content)
+
     context.manage_addProduct['OFSP'].manage_addFolder('contacts', 'Contact us')
+    f = open(ZOPE_HOME+'/Products/Site/templates/contacts.pt', 'r')
+    about_content = f.read()
+    f.close()
+    context['contacts'].manage_addProduct['PageTemplates'].manage_addPageTemplate(
+        'body.pt', text=about_content)
 
 
 def addAction(self, id='', title='', REQUEST=None):
