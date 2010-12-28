@@ -7,11 +7,11 @@
 <form name="form" action="addAction" method="post">
       <p>
 	id:<br />
-        <input type="text" name="id:string" size="30" value="site" />
+        <input type="text" name="id:string" size="30" value="" />
       </p>
       <p>
         title:<br />
-        <input type="text" name="title:string" size="30" value="Title here" />
+        <input type="text" name="title:string" size="30" value="" />
       </p>
       <input type="submit" value="  add  ">
 </form>

@@ -19,7 +19,7 @@ class Site(Folder):
 
     implements(ISite)
 
-    meta_type = 'Site'
+    meta_type = 'ZSite'
 
     manage_options=Folder.manage_options
 
@@ -68,6 +68,14 @@ def addAction(self, id='', title='', REQUEST=None):
             "Add a Site to Zope."
             site = Site(id, title)
             self._setObject(id, site)
+
+            # Add header and description properties.
+            # For better SEO use in index_html:
+            # <title tal:content="here/header">The title</title>
+            site_root = getattr(self, id)
+            site_root.manage_addProperty('header', '', 'string')
+            site_root.manage_addProperty('description', '', 'text')
+
             if REQUEST is not None:
                 return self.manage_main(self, REQUEST)
 
