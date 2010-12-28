@@ -1,6 +1,6 @@
 <div id="content">
   <h1>Contact us</h1>
-  <form method="post" action="sendEmail" id="contact-us-form">
+  <form method="post" action="send" id="contact-us-form">
     <input name="contact-us-form" value="true" type="hidden" />
     <h2>Contact us</h2>
     <fieldset>

@@ -6,3 +6,5 @@ class ISite(Interface):
     def getMenuItems():
         """Get site's Hello"""
 
+    def sendEmail():
+        """Send email messages"""

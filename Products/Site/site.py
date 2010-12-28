@@ -1,3 +1,6 @@
+import re
+import json
+
 from AccessControl import ClassSecurityInfo
 
 from Globals import InitializeClass
@@ -59,6 +62,49 @@ class Site(Folder):
                 obj = obj.aq_parent
         return item
 
+    security.declarePublic('sendEmail')
+    def sendEmail (self, request, To):
+        f = request.form
+        errors = {}
+
+        # Getting form data
+        firstname = f.get('name', '')
+        email = f.get('email', '').lower()
+        message = f.get('message', '')
+
+        if not firstname:
+            errors['name'] = 'Name is empty.';
+
+        if not email:
+            errors['email'] = 'E-mail address is empty.'
+
+        if not message:
+            errors['message'] = 'Message field is empty.';
+
+        if not self.validateEmail(email):
+            errors['email'] = 'Your e-mail address is not valid.'
+
+        if len(errors) == 0:
+            # Sending email
+            Msg = """Content-Type: text/plain; charset=UTF-8
+                     Content-Transfer-Encoding: 8bit
+
+                     %s
+                  """ % message
+            From = "%s <%s>" % (firstname, email)
+            Subj = "Question from example.com"
+            self.MailHost.send(Msg, To, From, Subj)
+
+            return json.dumps({'errors':errors, 'success':True},)
+        else:
+            return json.dumps({'errors':errors, 'success':False},)
+
+    def validateEmail(self, email):
+        if len(email) > 5:
+            if re.match('^[_.0-9a-z-+]+@([0-9a-z.]){1,}\.[a-z]{2,4}$', email) != None:
+                return True
+        return False
+
 InitializeClass(Site)
 
 # constructor pages. Only used when the product is added to a folder.
@@ -102,8 +148,18 @@ return [
     f = open(ZOPE_HOME+'/Products/Site/templates/contacts.pt', 'r')
     about_content = f.read()
     f.close()
-    context['contacts'].manage_addProduct['PageTemplates'].manage_addPageTemplate(
+    contacts = context['contacts']
+    contacts.manage_addProduct['PageTemplates'].manage_addPageTemplate(
         'body.pt', text=about_content)
+
+    # Creating send Python script for mail sending.
+    send_script = """
+To = "info@example.com"
+request = context.REQUEST
+return container.sendEmail (request, To)
+"""
+    contacts.manage_addProduct['PythonScripts'].manage_addPythonScript('send')
+    contacts['send'].ZPythonScript_edit('', send_script)
 
 def createMailHost(context):
     """Create MailHost for email sending from Zope"""
