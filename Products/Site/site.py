@@ -26,6 +26,10 @@ class Site(Folder):
         self.id = id
         self.title = title
 
+    def isRoot(self, context, container):
+        """Checking this folder is Root folder or not."""
+        return context == container
+
     security.declarePublic('getMenu')
     def getMenuItems(self, context, first_item='Home'):
         "Returns the menu items"
