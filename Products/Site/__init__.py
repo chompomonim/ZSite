@@ -1,4 +1,5 @@
-from site import Site, addForm, addAction
+from install import addForm, addAction
+from site import Site
 
 def initialize(registrar):
     registrar.registerClass(
