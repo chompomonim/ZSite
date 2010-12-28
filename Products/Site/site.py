@@ -64,7 +64,7 @@ InitializeClass(Site)
 
 # constructor pages. Only used when the product is added to a folder.
 
-def addAction(self, id='site', title='Title here', REQUEST=None):
+def addAction(self, id='', title='', REQUEST=None):
             "Add a Site to Zope."
             site = Site(id, title)
             self._setObject(id, site)
