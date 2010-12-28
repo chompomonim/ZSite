@@ -105,6 +105,10 @@ return [
     context['contacts'].manage_addProduct['PageTemplates'].manage_addPageTemplate(
         'body.pt', text=about_content)
 
+def createMailHost(context):
+    """Create MailHost for email sending from Zope"""
+    context.manage_addProduct['MailHost'].manage_addMailHost('MailHost', smtp_host='localhost')
+
 
 def addAction(self, id='', title='', REQUEST=None):
             "Add a Site to Zope."
@@ -121,6 +125,7 @@ def addAction(self, id='', title='', REQUEST=None):
             # Creating default content
             createDefaultIndex(site_root)
             createDefaultMenuItems(site_root)
+            createMailHost(site_root)
 
             if REQUEST is not None:
                 return self.manage_main(self, REQUEST)
