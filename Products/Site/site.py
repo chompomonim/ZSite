@@ -1,7 +1,6 @@
 #from Acquisition import Implicit
 
 from AccessControl import ClassSecurityInfo
-from AccessControl.Role import RoleManager
 
 from Globals import InitializeClass
 #from Globals import Persistent
