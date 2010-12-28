@@ -3,7 +3,6 @@
 from AccessControl import ClassSecurityInfo
 
 from Globals import InitializeClass
-#from Globals import Persistent
 from Globals import DTMLFile
 
 from OFS.Folder import Folder
