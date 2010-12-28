@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="title" tal:attributes="content here/header" />
+    <meta name="description" tal:attributes="content here/description" />
+    <meta name="keywords" content="Some keywords, more keywors, change, here" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/gif" />
+    <title tal:content="here/header">The title</title>
+</head>
+<body>
+  <div id="header">
+    Some header
+  </div>
+  <div id="menu">
+    <ul class="menu" tal:content="structure python:here.getMenuItems(context,'Start')" />
+  </div>
+
+  <!-- Show only on front page -->
+  <tal:include replace="structure here/frontpage.pt" condition="python:here.isRoot(context,container)" />
+  <!-- Show in all other pages. Add body.html to all your sites folders -->
+  <tal:include replace="structure here/body.pt" condition="python:not here.isRoot(context,container)" />
+
+  <div id="footer">
+    Copyright &copy; <strong>"My Company" Ltd.</strong>
+  </div>
+</body>
+</html>
