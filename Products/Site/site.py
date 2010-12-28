@@ -165,6 +165,15 @@ def createMailHost(context):
     """Create MailHost for email sending from Zope"""
     context.manage_addProduct['MailHost'].manage_addMailHost('MailHost', smtp_host='localhost')
 
+def createJS(context):
+    context.manage_addProduct['OFSP'].manage_addFolder('js', 'JavaScript')
+    file = open(ZOPE_HOME+'/Products/Site/js/default.js', 'r')
+    context['js'].manage_addProduct['OFSP'].manage_addFile('default.js', file=file.read())
+    file.close()
+
+    file = open(ZOPE_HOME+'/Products/Site/js/jquery-1.4.4.min.js', 'r')
+    context['js'].manage_addProduct['OFSP'].manage_addFile('jquery-1.4.4.min.js', file=file.read())
+    file.close()
 
 def addAction(self, id='', title='', REQUEST=None):
             "Add a Site to Zope."
@@ -182,6 +191,7 @@ def addAction(self, id='', title='', REQUEST=None):
             createDefaultIndex(site_root)
             createDefaultMenuItems(site_root)
             createMailHost(site_root)
+            createJS(site_root)
 
             if REQUEST is not None:
                 return self.manage_main(self, REQUEST)

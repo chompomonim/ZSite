@@ -9,6 +9,8 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/gif" />
     <title tal:content="here/header">The title</title>
+    <script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="js/default.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="header">
